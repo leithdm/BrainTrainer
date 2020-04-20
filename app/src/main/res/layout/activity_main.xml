@@ -76,7 +76,10 @@
             android:id="@+id/buttonAnsOne"
             android:background="#F13F3C"
             android:gravity="fill"
+            android:onClick="checkAnswer"
             android:text="Button"
+            android:textAlignment="center"
+            android:textSize="24sp"
             app:layout_columnWeight="1"
             app:layout_rowWeight="1" />
 
@@ -85,6 +88,9 @@
             android:background="#FFFFFF"
             android:backgroundTint="#A25BCD"
             android:gravity="fill"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:onClick="checkAnswer"
             android:text="Button"
             app:layout_columnWeight="1"
             app:layout_rowWeight="1" />
@@ -94,6 +100,9 @@
             android:background="#FFFFFF"
             android:backgroundTint="#46A9DF"
             android:gravity="fill"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:onClick="checkAnswer"
             android:text="Button"
             app:layout_columnWeight="1"
             app:layout_rowWeight="1" />
@@ -103,6 +112,9 @@
             android:background="#FFFFFF"
             android:backgroundTint="#97CB00"
             android:gravity="fill"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:onClick="checkAnswer"
             android:text="Button"
             app:layout_columnWeight="1"
             app:layout_rowWeight="1" />
