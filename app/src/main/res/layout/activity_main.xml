@@ -2,47 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/startGameConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/textViewTimer"
-        android:layout_width="60dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="#F4F4F4"
-        android:backgroundTint="#F9BB29"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewQuestion"
-        android:layout_width="180dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="16dp"
-        android:background="#FFFFFF"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toStartOf="@+id/textViewScore"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textViewTimer"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewScore"
-        android:layout_width="80dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="#38DBFE"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonStartGame"
@@ -51,6 +14,7 @@
         android:backgroundTint="#4CAF50"
         android:onClick="startGame"
         android:text="GO!"
+        android:textSize="60sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,97 +22,143 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <androidx.gridlayout.widget.GridLayout
-        android:id="@+id/gridLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainConstraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        app:columnCount="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewQuestion"
-        app:rowCount="2">
+        android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/buttonAnsOne"
-            android:background="#F13F3C"
-            android:gravity="fill"
-            android:onClick="checkAnswer"
-            android:tag="0"
-            android:text="Button"
+            android:id="@+id/buttonPlayAgain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="154dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="153dp"
+            android:layout_marginBottom="43dp"
+            android:onClick="playAgain"
+            android:text="Play Again"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewQuestionResult" />
+
+        <TextView
+            android:id="@+id/textViewTimer"
+            android:layout_width="60dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="#F4F4F4"
+            android:backgroundTint="#F9BB29"
             android:textAlignment="center"
             android:textSize="24sp"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/buttonAnsTwo"
+        <TextView
+            android:id="@+id/textViewScore"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="#38DBFE"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewQuestionResult"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="106dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="105dp"
+            android:text="Correct !"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
+
+        <TextView
+            android:id="@+id/textViewQuestion"
+            android:layout_width="180dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="29dp"
             android:background="#FFFFFF"
-            android:backgroundTint="#A25BCD"
-            android:gravity="fill"
-            android:onClick="checkAnswer"
-            android:tag="1"
-            android:text="Button"
             android:textAlignment="center"
-            android:textSize="24sp"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1" />
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@+id/textViewScore"
+            app:layout_constraintStart_toEndOf="@+id/textViewTimer"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/buttonAnsThree"
-            android:background="#FFFFFF"
-            android:backgroundTint="#46A9DF"
-            android:gravity="fill"
-            android:onClick="checkAnswer"
-            android:tag="2"
-            android:text="Button"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1" />
+        <androidx.gridlayout.widget.GridLayout
+            android:id="@+id/gridLayout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="32dp"
+            app:columnCount="2"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTimer"
+            app:rowCount="2"
+            tools:layout_editor_absoluteX="32dp">
 
-        <Button
-            android:id="@+id/buttonAnsFour"
-            android:background="#FFFFFF"
-            android:backgroundTint="#97CB00"
-            android:gravity="fill"
-            android:onClick="checkAnswer"
-            android:tag="3"
-            android:text="Button"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1" />
+            <Button
+                android:id="@+id/buttonAnsOne"
+                android:background="#F13F3C"
+                android:gravity="fill"
+                android:onClick="checkAnswer"
+                android:tag="0"
+                android:text="Button"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1" />
 
-    </androidx.gridlayout.widget.GridLayout>
+            <Button
+                android:id="@+id/buttonAnsTwo"
+                android:background="#FFFFFF"
+                android:backgroundTint="#A25BCD"
+                android:gravity="fill"
+                android:onClick="checkAnswer"
+                android:tag="1"
+                android:text="Button"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1" />
 
-    <TextView
-        android:id="@+id/textViewQuestionResult"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:text="Correct !"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonStartGame" />
+            <Button
+                android:id="@+id/buttonAnsThree"
+                android:background="#FFFFFF"
+                android:backgroundTint="#46A9DF"
+                android:gravity="fill"
+                android:onClick="checkAnswer"
+                android:tag="2"
+                android:text="Button"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1" />
 
-    <Button
-        android:id="@+id/buttonPlayAgain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="43dp"
-        android:onClick="playAgain"
-        android:text="Play Again"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+            <Button
+                android:id="@+id/buttonAnsFour"
+                android:background="#FFFFFF"
+                android:backgroundTint="#97CB00"
+                android:gravity="fill"
+                android:onClick="checkAnswer"
+                android:tag="3"
+                android:text="Button"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1" />
+
+        </androidx.gridlayout.widget.GridLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.darrenmleith.braintrainer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
+    ConstraintLayout mainConstraintLayout;
     TextView timerTextView;
     TextView questionTextView;
     TextView scoreTextView;
@@ -28,12 +30,11 @@ public class MainActivity extends AppCompatActivity {
     Button buttonAnsTwo;
     Button buttonAnsThree;
     Button buttonAnsFour;
-    int correctAnswer;
-    int gameScore = 0;
     CountDownTimer countDownTimer;
     Boolean gameInProgress = false;
+    ArrayList<Integer> possibleAnswers;
     int correctAnswerPosition;
-    ArrayList<Integer> fourPossibleAnswers;
+    int gameScore = 0;
     int noOfQuestions = 0;
 
     @Override
@@ -41,54 +42,43 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        startGameButton = findViewById(R.id.buttonStartGame);
+        startGameButton.setVisibility(View.VISIBLE);
+        mainConstraintLayout = findViewById(R.id.mainConstraintLayout);
+        mainConstraintLayout.setVisibility(View.INVISIBLE);
+
+
         timerTextView = findViewById(R.id.textViewTimer);
-        questionTextView = findViewById(R.id.textViewQuestion);
         scoreTextView = findViewById(R.id.textViewScore);
         userFeedBack = findViewById(R.id.textViewQuestionResult);
-        playAgainButton = findViewById(R.id.buttonPlayAgain);
-        startGameButton = findViewById(R.id.buttonStartGame);
         buttonAnsOne = findViewById(R.id.buttonAnsOne);
         buttonAnsTwo = findViewById(R.id.buttonAnsTwo);
         buttonAnsThree = findViewById(R.id.buttonAnsThree);
         buttonAnsFour = findViewById(R.id.buttonAnsFour);
-
-
-        //initially the screen is blank except for the playGame button
-        timerTextView.setVisibility(View.INVISIBLE);
-        questionTextView.setVisibility(View.INVISIBLE);
-        scoreTextView.setVisibility(View.INVISIBLE);
-        userFeedBack.setVisibility(View.INVISIBLE);
-        playAgainButton.setVisibility(View.INVISIBLE);
-        startGameButton.setVisibility(View.VISIBLE);
-        buttonAnsOne.setVisibility(View.INVISIBLE);
-        buttonAnsTwo.setVisibility(View.INVISIBLE);
-        buttonAnsThree.setVisibility(View.INVISIBLE);
-        buttonAnsFour.setVisibility(View.INVISIBLE);
+        questionTextView = findViewById(R.id.textViewQuestion);
+        playAgainButton = findViewById(R.id.buttonPlayAgain);
     }
 
     public void startGame(View view) {
         gameInitializer();
     }
 
+    public void playAgain(View view) {
+        gameInitializer();
+    }
+
     private void gameInitializer() {
-        gameInProgress = true;
-        timerTextView.setVisibility(View.VISIBLE);
-        questionTextView.setVisibility(View.VISIBLE);
-        scoreTextView.setVisibility(View.VISIBLE);
         startGameButton.setVisibility(View.INVISIBLE);
-        buttonAnsOne.setVisibility(View.VISIBLE);
-        buttonAnsTwo.setVisibility(View.VISIBLE);
-        buttonAnsThree.setVisibility(View.VISIBLE);
-        buttonAnsFour.setVisibility(View.VISIBLE);
-        playAgainButton.setVisibility(View.INVISIBLE);
+        mainConstraintLayout.setVisibility(View.VISIBLE);
+        gameInProgress = true;
         timerTextView.setText("30s");
         gameScore = 0;
         noOfQuestions = 0;
         scoreTextView.setText(Integer.toString(gameScore));
+        playAgainButton.setVisibility(View.INVISIBLE);
         userFeedBack.setText("");
         startTimer();
         playingAlgorithm();
-
     }
 
     public void playingAlgorithm() {
@@ -96,25 +86,25 @@ public class MainActivity extends AppCompatActivity {
             int variableOne = randomNumber();
             int variableTwo = randomNumber();
             questionTextView.setText("" + variableOne + " + " + variableTwo);
-            correctAnswer = variableOne + variableTwo;
+            int correctAnswer = variableOne + variableTwo;
 
-            fourPossibleAnswers = new ArrayList<>();
+            possibleAnswers = new ArrayList<>();
             correctAnswerPosition = (int) (Math.random() * 4);
-            for (int i = 0; i < 4 ; i++) {
+            for (int i = 0; i < 4; i++) {
                 if (i == correctAnswerPosition) {
-                    fourPossibleAnswers.add(correctAnswer);
+                    possibleAnswers.add(correctAnswer);
                 } else {
                     int wrongAnswer = randomNumber();
                     while (wrongAnswer == correctAnswer) {
                         wrongAnswer = randomNumber();
                     }
-                    fourPossibleAnswers.add(wrongAnswer);
+                    possibleAnswers.add(wrongAnswer);
                 }
             }
-            buttonAnsOne.setText(Integer.toString(fourPossibleAnswers.get(0)));
-            buttonAnsTwo.setText(Integer.toString(fourPossibleAnswers.get(1)));
-            buttonAnsThree.setText(Integer.toString(fourPossibleAnswers.get(2)));
-            buttonAnsFour.setText(Integer.toString(fourPossibleAnswers.get(3)));
+            buttonAnsOne.setText(Integer.toString(possibleAnswers.get(0)));
+            buttonAnsTwo.setText(Integer.toString(possibleAnswers.get(1)));
+            buttonAnsThree.setText(Integer.toString(possibleAnswers.get(2)));
+            buttonAnsFour.setText(Integer.toString(possibleAnswers.get(3)));
         }
     }
 
@@ -130,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish() {
                 countDownTimer.cancel();
                 userFeedBack.setText("Game Over!");
+                userFeedBack.setTextColor(Color.BLACK);
                 playAgainButton.setVisibility(View.VISIBLE);
                 gameInProgress = false;
             }
@@ -142,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
             Button clickedButton = (Button) view;
             if (clickedButton.getTag().toString().equals(Integer.toString(correctAnswerPosition))) {
                 userFeedBack.setText("Correct !");
-                userFeedBack.setTextColor(Color.GREEN);
+                userFeedBack.setTextColor(Color.BLUE);
                 userFeedBack.setVisibility(View.VISIBLE);
                 gameScore++;
                 scoreTextView.setText(gameScore + "/" + noOfQuestions);
@@ -160,9 +151,5 @@ public class MainActivity extends AppCompatActivity {
     private int randomNumber() {
         Random r = new Random();
         return r.nextInt(50) + 1;
-    }
-
-    public void playAgain(View view) {
-        gameInitializer();
     }
 }
