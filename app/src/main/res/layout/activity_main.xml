@@ -15,7 +15,7 @@
         android:background="#F4F4F4"
         android:backgroundTint="#F9BB29"
         android:textAlignment="center"
-        android:textSize="30sp"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,13 +34,13 @@
 
     <TextView
         android:id="@+id/textViewScore"
-        android:layout_width="60dp"
+        android:layout_width="80dp"
         android:layout_height="100dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="#38DBFE"
         android:textAlignment="center"
-        android:textSize="30sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -77,6 +77,7 @@
             android:background="#F13F3C"
             android:gravity="fill"
             android:onClick="checkAnswer"
+            android:tag="0"
             android:text="Button"
             android:textAlignment="center"
             android:textSize="24sp"
@@ -88,10 +89,11 @@
             android:background="#FFFFFF"
             android:backgroundTint="#A25BCD"
             android:gravity="fill"
+            android:onClick="checkAnswer"
+            android:tag="1"
+            android:text="Button"
             android:textAlignment="center"
             android:textSize="24sp"
-            android:onClick="checkAnswer"
-            android:text="Button"
             app:layout_columnWeight="1"
             app:layout_rowWeight="1" />
 
@@ -100,10 +102,11 @@
             android:background="#FFFFFF"
             android:backgroundTint="#46A9DF"
             android:gravity="fill"
+            android:onClick="checkAnswer"
+            android:tag="2"
+            android:text="Button"
             android:textAlignment="center"
             android:textSize="24sp"
-            android:onClick="checkAnswer"
-            android:text="Button"
             app:layout_columnWeight="1"
             app:layout_rowWeight="1" />
 
@@ -112,10 +115,11 @@
             android:background="#FFFFFF"
             android:backgroundTint="#97CB00"
             android:gravity="fill"
+            android:onClick="checkAnswer"
+            android:tag="3"
+            android:text="Button"
             android:textAlignment="center"
             android:textSize="24sp"
-            android:onClick="checkAnswer"
-            android:text="Button"
             app:layout_columnWeight="1"
             app:layout_rowWeight="1" />
 

@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     int gameScore = 0;
     CountDownTimer countDownTimer;
     Boolean gameInProgress = false;
+    int correctAnswerPosition;
+    ArrayList<Integer> fourPossibleAnswers;
+    int noOfQuestions = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         playAgainButton.setVisibility(View.INVISIBLE);
         timerTextView.setText("30s");
         gameScore = 0;
+        noOfQuestions = 0;
         scoreTextView.setText(Integer.toString(gameScore));
         userFeedBack.setText("");
         startTimer();
@@ -94,25 +98,23 @@ public class MainActivity extends AppCompatActivity {
             questionTextView.setText("" + variableOne + " + " + variableTwo);
             correctAnswer = variableOne + variableTwo;
 
-
-            ArrayList<Integer> fourPossibleAnswers = new ArrayList<>();
-            fourPossibleAnswers.add(randomNumberAboveAnswer(correctAnswer));
-            fourPossibleAnswers.add(randomNumberBelowAnswer(correctAnswer));
-            fourPossibleAnswers.add(randomNumberAboveAnswer(correctAnswer));
-            fourPossibleAnswers.add(correctAnswer);
-            Collections.shuffle(fourPossibleAnswers, new Random());
-
+            fourPossibleAnswers = new ArrayList<>();
+            correctAnswerPosition = (int) (Math.random() * 4);
+            for (int i = 0; i < 4 ; i++) {
+                if (i == correctAnswerPosition) {
+                    fourPossibleAnswers.add(correctAnswer);
+                } else {
+                    int wrongAnswer = randomNumber();
+                    while (wrongAnswer == correctAnswer) {
+                        wrongAnswer = randomNumber();
+                    }
+                    fourPossibleAnswers.add(wrongAnswer);
+                }
+            }
             buttonAnsOne.setText(Integer.toString(fourPossibleAnswers.get(0)));
-            buttonAnsOne.setTag(Integer.toString(fourPossibleAnswers.get(0)));
-
             buttonAnsTwo.setText(Integer.toString(fourPossibleAnswers.get(1)));
-            buttonAnsTwo.setTag(Integer.toString(fourPossibleAnswers.get(1)));
-
             buttonAnsThree.setText(Integer.toString(fourPossibleAnswers.get(2)));
-            buttonAnsThree.setTag(Integer.toString(fourPossibleAnswers.get(2)));
-
             buttonAnsFour.setText(Integer.toString(fourPossibleAnswers.get(3)));
-            buttonAnsFour.setTag(Integer.toString(fourPossibleAnswers.get(3)));
         }
     }
 
@@ -136,37 +138,28 @@ public class MainActivity extends AppCompatActivity {
 
     public void checkAnswer(View view) {
         if (gameInProgress) {
+            noOfQuestions++;
             Button clickedButton = (Button) view;
-            if (clickedButton.getTag().toString().equals(Integer.toString(correctAnswer))) {
+            if (clickedButton.getTag().toString().equals(Integer.toString(correctAnswerPosition))) {
                 userFeedBack.setText("Correct !");
                 userFeedBack.setTextColor(Color.GREEN);
                 userFeedBack.setVisibility(View.VISIBLE);
                 gameScore++;
-                scoreTextView.setText(Integer.toString(gameScore));
+                scoreTextView.setText(gameScore + "/" + noOfQuestions);
                 playingAlgorithm();
             } else {
-                userFeedBack.setText("Wrong :-(");
+                userFeedBack.setText("Wrong :-/");
                 userFeedBack.setTextColor(Color.RED);
                 userFeedBack.setVisibility(View.VISIBLE);
+                scoreTextView.setText(gameScore + "/" + noOfQuestions);
                 playingAlgorithm();
             }
         }
-
     }
 
     private int randomNumber() {
         Random r = new Random();
-        return r.nextInt(100) + 1;
-    }
-
-    private int randomNumberAboveAnswer(int answer) {
-        Random r = new Random();
-        return answer + r.nextInt(10) + 1;
-    }
-
-    private int randomNumberBelowAnswer(int answer) {
-        Random r = new Random();
-        return answer - r.nextInt(10) + 1;
+        return r.nextInt(50) + 1;
     }
 
     public void playAgain(View view) {
